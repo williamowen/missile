@@ -8,25 +8,25 @@ var keypress = require('keypress')
 ThunderConnector.connect();
 
 function up(degrees){
-	stopTime = Math.floor(degrees * 22.3);
+	stopTime = Math.floor(degrees * 1.5);
 	setTimeout(function(){ThunderConnector.command('up');},0);
 	setTimeout(function(){ThunderConnector.command('stop');},stopTime);
 }
 
 function down(degrees){
-	stopTime = Math.floor(degrees * 22.3);
+	stopTime = Math.floor(degrees * 1.5);
 	setTimeout(function(){ThunderConnector.command('down');},0);
 	setTimeout(function(){ThunderConnector.command('stop');},stopTime);
 }
 
 function turnRightDegrees(degrees){
-	stopTime = Math.floor(degrees * 22.3)
+	stopTime = Math.floor(degrees * 1.5)
 	setTimeout(function(){ThunderConnector.command('right');},0);
 	setTimeout(function(){ThunderConnector.command('stop');},stopTime);
 }
 
 function turnLeftDegrees(degrees){
-	stopTime = Math.floor(degrees * 22.3)
+	stopTime = Math.floor(degrees * 1.5)
 	setTimeout(function(){ThunderConnector.command('left');},0);
 	setTimeout(function(){ThunderConnector.command('stop');},stopTime);
 }
@@ -34,7 +34,16 @@ function turnLeftDegrees(degrees){
 function fire(){
 	setTimeout(function(){ThunderConnector.command('fire');},0);
 }
-
+function turnLeftDoubleDegrees(degrees){
+  stopTime = Math.floor(degrees * 20)
+  setTimeout(function(){ThunderConnector.command('left');},0);
+  setTimeout(function(){ThunderConnector.command('stop');},stopTime);
+}
+function turnRightDoubleDegrees(degrees){
+  stopTime = Math.floor(degrees * 20)
+  setTimeout(function(){ThunderConnector.command('right');},0);
+  setTimeout(function(){ThunderConnector.command('stop');},stopTime);
+}
 keypress(process.stdin);
 
 // listen for the "keypress" event
@@ -56,6 +65,12 @@ process.stdin.on('keypress', function (ch, key) {
   } else if (key.name == 'space'){
   	console.log("fired");
   	fire();
+  } else if (key.name == 'q'){
+    console.log("moved double");
+    turnLeftDoubleDegrees(10);
+  } else if (key.name == 'e'){
+    console.log("moved double");
+    turnRightDoubleDegrees(10);
   }
 
 
